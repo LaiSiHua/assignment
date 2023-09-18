@@ -52,9 +52,15 @@ def AddAdmin():
     insert_sql = "INSERT INTO admin VALUES (%s, %s, %s)"
     cursor = db_conn.cursor()
 
-    cursor.execute(insert_sql, (name, email, contactNum))
-    db_conn.commit()
-    cursor.close()
+    try:
+        cursor.execute(insert_sql, (name, email, contactNum))
+        db_conn.commit()
+
+    except Exception as e:
+        return render_template('CompanyAdministration.html')
+
+    finally:
+        cursor.close()
 
     return render_template('AdminAdministration.html')
 
