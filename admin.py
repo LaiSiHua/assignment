@@ -21,7 +21,7 @@ table = 'admin'
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('AdminAdministration.html')
 
 @app.route('/AdminAdministration')
 def AdminAdministration():
