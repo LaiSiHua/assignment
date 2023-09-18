@@ -44,7 +44,7 @@ def CompanyRegistration():
     return render_template('CompanyRegistration.html')
 
 @app.route("/AdminAdministration", methods=['POST'])
-def AddEmp():
+def AddAdmin():
     name = request.form['name']
     email = request.form['email']
     contactNum = request.form['contactNum']
