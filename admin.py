@@ -49,7 +49,7 @@ def AddAdmin():
     email = request.form['email']
     contactNum = request.form['contactNum']
     
-    insert_sql = "INSERT INTO admin VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO admin VALUES (%s, %s, %s)"
     cursor = db_conn.cursor()
 
     cursor.execute(insert_sql, (name, email, contactNum))
