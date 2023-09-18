@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from pymysql import connections
 import os
-import boto3
+# import boto3
 from config import *
 
 app = Flask(__name__)
@@ -43,7 +43,7 @@ def StudentRegistration():
 def CompanyRegistration():
     return render_template('CompanyRegistration.html')
 
-@app.route("/AdminAdministration", methods=['POST'])
+@app.route("/AddAdmin", methods=['POST'])
 def AddAdmin():
     name = request.form['name']
     email = request.form['email']
