@@ -8,10 +8,11 @@
   <meta name="description" content="">
   <title>StudentRegistration</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style/nicepage.css')}}" media="screen">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/StudentRegistration.css')}}"
-    media="screen">
-  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/jquery.js')}}" defer=""></script>
-  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/nicepage.js')}}" defer=""></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/StudentRegistration.css')}}" media="screen">
+  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/jquery.js')}}"
+    defer=""></script>
+  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/nicepage.js')}}"
+    defer=""></script>
   <meta name="generator" content="Nicepage 5.17.1, nicepage.com">
   <link id="u-theme-google-font" rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -84,13 +85,14 @@
           <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
         </div>
       </nav>
-      <img class="u-image u-image-contain u-image-default u-image-1" src="{{ url_for('static', filename='images/logo-removebg-preview1.png')}}" alt=""
-        data-image-width="416" data-image-height="121">
+      <img class="u-image u-image-contain u-image-default u-image-1"
+        src="{{ url_for('static', filename='images/logo-removebg-preview1.png')}}" alt="" data-image-width="416"
+        data-image-height="121">
     </div>
   </header>
   <section class="u-clearfix u-section-1" id="sec-b6ae">
     <a href="{{ url_for('StudentRegistration')}}"
-      class="u-border-none u-btn u-button-style u-grey-10 u-hover-grey-10 u-btn-1">STudent</a>
+      class="u-border-none u-btn u-button-style u-grey-10 u-hover-grey-10 u-btn-1">Student</a>
     <a href="{{ url_for('CompanyRegistration')}}"
       class="u-border-none u-btn u-button-style u-hover-grey-10 u-none u-btn-2">company</a>
     <div class="u-table u-table-responsive u-table-1">
@@ -116,60 +118,23 @@
               <span style="text-decoration: underline !important;">Decision</span>
             </td>
           </tr>
+
+          {% for data in student %}
           <tr style="height: 51px;">
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
+            <td class="u-table-cell">{{data[0]}}</td>
+            <td class="u-table-cell">{{data[1]}}</td>
+            <td class="u-table-cell">{{data[2]}}</td>
+            <td class="u-table-cell">
+              <a href="/rejectStudent/{{data[0]}}" style="background-color: #478ac9; padding: 5px 10px 5px 10px; color: #ffffff; margin: 5px;"> Reject</a>
+              <a href="/approveStudent/{{data[0]}}" style="background-color: #478ac9; padding: 5px 10px 5px 10px; color: #ffffff; margin: 5px;"> Approve</a>
+            </td>
           </tr>
-          <tr style="height: 50px;">
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-          </tr>
-          <tr style="height: 51px;">
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-          </tr>
-          <tr style="height: 51px;">
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-          </tr>
-          <tr style="height: 51px;">
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-            <td class="u-table-cell"></td>
-          </tr>
+          {% endfor %}
+
         </tbody>
       </table>
     </div>
     <div class="u-border-1 u-border-palette-5-dark-1 u-expanded-width u-line u-line-horizontal u-line-1"></div>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-3"> Reject</a>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-4"> Reject</a>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-5"> Reject</a>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-6"> Reject</a>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-7"> Reject</a>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-8"> Approve</a>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-9"> Approve</a>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-10"> Approve</a>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-11"> Approve</a>
-    <a href="https://nicepage.com/c/architecture-building-website-templates"
-      class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-12"> Approve</a>
   </section>
 
 
