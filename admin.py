@@ -80,7 +80,7 @@ def CompanyAdministration():
 @app.route('/delete/<string:id>', methods = ['POST', 'GET'])
 def deleteCompany(id):
     cursor = db_conn.cursor()
-    cursor.execute('DELETE FROM company WHERE companyID = %s', id)
+    cursor.execute('DELETE FROM company WHERE name = %s', id)
     db_conn.commit() 
     return redirect(url_for('CompanyAdministration'))
 
