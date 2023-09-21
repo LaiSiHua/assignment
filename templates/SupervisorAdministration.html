@@ -6,27 +6,68 @@
   <meta charset="utf-8">
   <meta name="keywords" content="">
   <meta name="description" content="">
-  <title>SupervisorAdministration</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/nicepage.css')}}" media="screen">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/SupervisorAdministration.css')}}" media="screen">
-  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/jquery.js')}}" defer=""></script>
-  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/nicepage.js')}}" defer=""></script>
+  <meta name="theme-color" content="#478ac9">
+  <meta property="og:title" content="SupervisorAdministration">
+  <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
   <meta name="generator" content="Nicepage 5.17.1, nicepage.com">
   <meta name="referrer" content="origin">
+
+  <title>SupervisorAdministration</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/nicepage.css')}}" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/SupervisorAdministration.css')}}" media="screen">
   <link id="u-theme-google-font" rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
 
-
-
+  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/jquery.js')}}"
+    defer=""></script>
+  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/nicepage.js')}}"
+    defer=""></script>
+  <script class="u-script" type="text/javascript" src="{{url_for('static', filename='script/script.js')}}"
+    defer=""></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"name": ""
 }</script>
-  <meta name="theme-color" content="#478ac9">
-  <meta property="og:title" content="SupervisorAdministration">
-  <meta property="og:type" content="website">
-  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+
+  <style>
+    .createBtn {
+      background-color: #478ac9;
+      color: white;
+      margin-top: 20px;
+      position: relative;
+      padding: 10px 30px 10px 30px;
+      border: none;
+    }
+
+    .popup-msg {
+      background-color: #D1FFBD;
+      padding: 10px 30px;
+      position: absolute;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .msg {
+      font-size: 14px;
+      color: #006100;
+      font-weight: bold;
+    }
+
+    .close-msg {
+      border: none;
+      background-color: #D1FFBD;
+      float: right;
+      color: #006100;
+      font-size: 10px;
+      padding-top: 5px;
+      margin-left: 20px;
+    }
+  </style>
+
 </head>
 
 <body class="u-body u-xl-mode" data-lang="en">
@@ -84,8 +125,9 @@
           <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
         </div>
       </nav>
-      <img class="u-image u-image-contain u-image-default u-image-1" src="{{ url_for('static', filename='images/logo-removebg-preview1.png')}}" alt=""
-        data-image-width="416" data-image-height="121">
+      <img class="u-image u-image-contain u-image-default u-image-1"
+        src="{{ url_for('static', filename='images/logo-removebg-preview1.png')}}" alt="" data-image-width="416"
+        data-image-height="121">
     </div>
   </header>
   <section class="u-clearfix u-section-1" id="sec-f31b">
@@ -100,9 +142,7 @@
       <div class="u-container-layout u-container-layout-1">
         <p class="u-text u-text-default u-text-1">Add New Supervisor</p>
         <div class="u-form u-form-1">
-          <form action="/AddSupervisor"
-            class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"
-            style="padding: 10px;" method="POST">
+          <form action="/SupervisorAdministration" style="padding: 10px;" method="POST">
             <div class="u-form-group u-form-group-1">
               <label for="text-3503" class="u-label">Staff ID</label>
               <input type="text" placeholder="Enter your staff ID" id="text-3503" name="staffID"
@@ -124,14 +164,20 @@
                 class="u-input u-input-rectangle">
             </div>
             <div class="u-align-center u-form-group u-form-submit">
-              <button href="#" class="u-btn u-btn-submit u-button-style">Create</button>
-              <input type="submit" value="submit" class="u-form-control-hidden">
+              <button type="submit" class="createBtn">Create</button>
             </div>
-            <!-- <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
-            <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try
-              again. </div>
-            <input type="hidden" value="" name="recaptchaResponse">
-            <input type="hidden" name="formServices" value="bae67b54-af6c-124f-d600-1facb2d1de6d"> -->
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="popup-msg" role="alert">
+              <span class="msg">{{ message }}</span>
+              <input type="button" class="close-msg" value=&#10006 onclick=delete_flash(this)>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
           </form>
         </div>
       </div>

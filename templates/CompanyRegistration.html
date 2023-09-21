@@ -6,28 +6,101 @@
   <meta charset="utf-8">
   <meta name="keywords" content="">
   <meta name="description" content="">
+  <meta name="theme-color" content="#478ac9">
+  <meta property="og:title" content="CompanyRegistration">
+  <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+  <meta name="generator" content="Nicepage 5.17.1, nicepage.com">
+
   <title>CompanyRegistration</title>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='style/nicepage.css')}}" media="screen">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/CompanyRegistration.css')}}" media="screen">
+  <link id="u-theme-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+
   <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/jquery.js')}}"
     defer=""></script>
   <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/nicepage.js')}}"
     defer=""></script>
-  <meta name="generator" content="Nicepage 5.17.1, nicepage.com">
-  <link id="u-theme-google-font" rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-
-
-
+  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='script/script.js')}}"
+    defer=""></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"name": ""
 }</script>
-  <meta name="theme-color" content="#478ac9">
-  <meta property="og:title" content="CompanyRegistration">
-  <meta property="og:type" content="website">
-  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+
+
+  <style>
+    .btn-reject {
+      background-color: #ff0000;
+      padding: 5px 10px 5px 10px;
+      color: #ffffff;
+      margin: 5px;
+    }
+
+    .btn-reject:hover {
+      text-decoration: none;
+      color: white;
+    }
+
+    .btn-approve {
+      background-color: #478ac9;
+      padding: 5px 10px 5px 10px;
+      color: #ffffff;
+      margin: 5px;
+    }
+
+    .btn-approve:hover {
+      text-decoration: none;
+      color: white;
+    }
+
+    #tableScroll {
+      overflow-y: auto;
+    }
+
+    tr:first-child {
+      position: sticky;
+      top: 0;
+    }
+
+    .createBtn {
+      background-color: #478ac9;
+      color: white;
+      margin-top: 20px;
+      position: relative;
+      padding: 10px 30px 10px 30px;
+      border: none;
+    }
+
+    .popup-msg {
+      background-color: #D1FFBD;
+      padding: 10px 30px;
+      position: absolute;
+      border-radius: 10px;
+      text-align: center;
+      left: 200px;
+    }
+
+    .msg {
+      font-size: 14px;
+      color: #006100;
+      font-weight: bold;
+    }
+
+    .close-msg {
+      border: none;
+      background-color: #D1FFBD;
+      float: right;
+      color: #006100;
+      font-size: 10px;
+      padding-top: 5px;
+      margin-left: 20px;
+    }
+  </style>
 </head>
 
 <body class="u-body u-xl-mode" data-lang="en">
@@ -96,7 +169,7 @@
       class="u-border-none u-btn u-button-style u-hover-grey-10 u-none u-btn-1">Student</a>
     <a href="{{ url_for('CompanyRegistration')}}"
       class="u-border-none u-btn u-button-style u-grey-10 u-hover-grey-10 u-btn-2">company</a>
-    <div class="u-table u-table-responsive u-table-1">
+    <div class="u-table u-table-responsive u-table-1" id="tableScroll">
       <table class="u-table-entity">
         <colgroup>
           <col width="15.8%">
@@ -109,13 +182,13 @@
             <td class="u-grey-10 u-table-cell u-table-cell-1">
               <span style="text-decoration: underline !important;">Company Name</span>
             </td>
-            <td class="u-table-cell">
+            <td class="u-grey-10 u-table-cell u-table-cell-1">
               <span style="text-decoration: underline !important;">Company Contact Number</span>
             </td>
-            <td class="u-table-cell">
+            <td class="u-grey-10 u-table-cell u-table-cell-1">
               <span style="text-decoration: underline !important;">Company Address</span>
             </td>
-            <td class="u-table-cell">
+            <td class="u-grey-10 u-table-cell u-table-cell-1">
               <span style="text-decoration: underline !important;">Decision</span>
             </td>
           </tr>
@@ -126,11 +199,8 @@
             <td class="u-table-cell">{{data[1]}}</td>
             <td class="u-table-cell">{{data[2]}}</td>
             <td class="u-table-cell" style="display: inline-block;">
-              <a href="/rejectCompany/{{data[0]}}"
-                style="background-color: #ff0000; padding: 5px 10px 5px 10px; color: #ffffff; margin: 5px;"> Reject</a>
-
-              <a href="/approveCompany/{{data[0]}}"
-                style="background-color: #478ac9; padding: 5px 10px 5px 10px; color: #ffffff; margin: 5px;"> Approve</a>
+              <a href="/rejectCompany/{{data[0]}}" class="btn-reject"> Reject</a>
+              <a href="/approveCompany/{{data[0]}}" class="btn-approve"> Approve</a>
             </td>
 
           </tr>
@@ -138,7 +208,21 @@
 
         </tbody>
       </table>
+
+
+
     </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="popup-msg" role="alert">
+      <span class="msg">{{ message }}</span>
+      <input type="button" class="close-msg" value=&#10006 onclick=delete_flash(this)>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
   </section>
 
 

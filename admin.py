@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from pymysql import connections
 import os
 # import boto3
 from config import *
 
+import logging 
+
 app = Flask(__name__)
+app.secret_key = "Admin"
 
 bucket = custombucket
 region = customregion
@@ -28,20 +31,21 @@ def home():
 def AdminAdministration():
     return render_template('AdminAdministration.html')
 
-@app.route("/AddAdmin", methods=['POST'])
+@app.route("/AdminAdministration", methods=['POST'])
 def AddAdmin():
-    name = request.form['name']
-    email = request.form['email']
-    contactNum = request.form['contactNum']
-    
-    insert_sql = "INSERT INTO admin VALUES (%s, %s, %s)"
-    cursor = db_conn.cursor()
-    cursor.execute(insert_sql, (name, email, contactNum))
-    db_conn.commit()
-    cursor.close()
+    if request.method == 'POST': 
+      name = request.form['name']
+      email = request.form['email']
+      contactNum = request.form['contactNum']
+      
+      insert_sql = "INSERT INTO admin VALUES (%s, %s, %s)"
+      cursor = db_conn.cursor()
+      cursor.execute(insert_sql, (name, email, contactNum))
+      flash('Admin Added Successfully')
+      db_conn.commit()
+      cursor.close()
 
     return render_template('AdminAdministration.html')
-
 
 
 # Supervisor 
@@ -49,7 +53,7 @@ def AddAdmin():
 def SupervisorAdministration():
     return render_template('SupervisorAdministration.html')
 
-@app.route("/AddSupervisor", methods=['POST'])
+@app.route("/SupervisorAdministration", methods=['POST'])
 def AddSupervisor():
     staffID = request.form['staffID']
     name = request.form['name']
@@ -59,6 +63,7 @@ def AddSupervisor():
     insert_sql = "INSERT INTO supervisor VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
     cursor.execute(insert_sql, (staffID, name, email, contactNum))
+    flash('Supervisor Added Successfully')
     db_conn.commit()
     cursor.close()
 
@@ -81,6 +86,7 @@ def CompanyAdministration():
 def deleteCompany(id):
     cursor = db_conn.cursor()
     cursor.execute('DELETE FROM company WHERE name = %s', id)
+    flash('Company Deleted Successfully')
     db_conn.commit() 
     return redirect(url_for('CompanyAdministration'))
 
@@ -101,8 +107,9 @@ def rejectCompany(id):
     cursor.execute("""
             UPDATE company
             SET status = %s
-            WHERE companyID = %s
+            WHERE name = %s
         """, (status_change, id))
+    flash('Company Rejected Successfully')
     db_conn.commit() 
     return redirect(url_for('CompanyRegistration'))
 
@@ -113,8 +120,9 @@ def approveCompany(id):
     cursor.execute("""
             UPDATE company
             SET status = %s
-            WHERE companyID = %s
+            WHERE name = %s
         """, (status_change, id))
+    flash('Company Approved Successfully')
     db_conn.commit() 
     return redirect(url_for('CompanyRegistration'))
 
@@ -140,6 +148,7 @@ def rejectStudent(id):
             SET status = %s
             WHERE studentID = %s
         """, (status_change, id))
+    flash('Student Rejected Successfully')
     db_conn.commit() 
     return redirect(url_for('StudentRegistration'))
 
@@ -152,6 +161,7 @@ def approveStudent(id):
             SET status = %s
             WHERE studentID = %s
         """, (status_change, id))
+    flash('Student Approved Successfully')
     db_conn.commit() 
     return redirect(url_for('StudentRegistration'))
 
